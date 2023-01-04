@@ -4,6 +4,11 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +64,13 @@ public class HomeController {
 		return "home";
 	}
 	@RequestMapping("/")
-	public String index() {
+	public String index(HttpServletRequest req,HttpServletResponse res,HttpSession session) {
+		Cookie c=new Cookie("testData","cookiedata");
+		c.setMaxAge(60*60*24);
+		res.addCookie(c);
+		session.setAttribute("sessionId", "admin");
+		
+		
 		//등록된 springbean 출력하기
 //		a.setName("아롱이");
 //		a.setAge(8);
@@ -74,6 +85,12 @@ public class HomeController {
 		//메인화면을 출력해주는 mapping 메소드
 		// /WEB-INF/views/return값.jsp 
 		// -> request.getRequestDispatcher("/WEB-INF/views/return값.jsp ").foward(req,res);
+		
+		
+		
+		
+		
+		
 		
 		return "index";
 	}
