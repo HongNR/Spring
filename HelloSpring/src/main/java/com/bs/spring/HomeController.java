@@ -7,12 +7,14 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bs.spring.model.vo.Animal;
+import com.bs.spring.model.vo.Person;
 
 /**
  * Handles requests for the application home page.
@@ -24,11 +26,15 @@ public class HomeController {
 	
 	//등록되어있는 springbean은 필드로 선언해서 사용
 	@Autowired
-	private Animal alonge;
+	@Qualifier(value="alonge")
+	private Animal a;
 
 	@Autowired
-	private Animal dog;
+	@Qualifier(value="dog")
+	private Animal b;
 	
+	@Autowired
+	private Person yeonji;
 	
 	
 	
@@ -53,8 +59,10 @@ public class HomeController {
 //		a.setAge(8);
 //		a.setGender("여");
 		
-		System.out.println(alonge);
-		System.out.println("dog : "+dog);
+//		System.out.println(a);
+//		System.out.println("dog : "+b);
+		
+		System.out.println(yeonji);
 		
 		//메인화면을 출력해주는 mapping 메소드
 		// /WEB-INF/views/return값.jsp 

@@ -17,4 +17,12 @@ public class Animal {
 		this.name=name;
 		this.age=age;
 	}
+	
+	public void initTest() {
+		System.out.println("생성 후 실행하는 메소드");
+	}
+	
+	public void destroyTest() {
+		System.out.println("객체 소멸 후 실행하는 메소드");
+	}
 }
