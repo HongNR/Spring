@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<c:set var="path" value="${pageContext.request.contextPath }"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param name="title" value="Member List"/>
 </jsp:include>
@@ -37,7 +37,9 @@
 					</c:forEach>
 				</td>
 				<td>
-					<button class="btn btn-outline-warning">수정하기</button>
+					<button class="btn btn-outline-warning" 
+					onclick="location.replace('${path}/demo/updatedemo.do?no=${dev.devNo }');">
+					수정</button>
 				</td>
 			<tr>
 		</c:forEach>
