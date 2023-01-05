@@ -4,6 +4,16 @@
   	<insert id="insertDemo" parameterType="demo">
   		INSERT INTO DEV VALUES(SEQ_DEV_NO.NEXTVAL, #{devName},#{devAge},
   			#{devEmail}, #{devGender},
-  		<foreach item="l" collection="devLang" open="'" close="'" separator=",">${l}</foreach>)
+  		<!-- <foreach item="l" collection="devLang" open="'" close="'" separator=",">${l}</foreach> -->
+  		#{devLang, typeHandler=strArr}
+  		)
   	</insert>
+  	
+  	<resultMap type="demo" id="demoMap">
+  		<result property="devLang" column="devLang" typeHandler="strArr"/>
+  	</resultMap>
+  	
+  	<select id="selectList" resultMap="demoMap">
+  		SELECT * FROM DEV
+  	</select>
 </mapper>

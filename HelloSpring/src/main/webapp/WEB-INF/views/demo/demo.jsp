@@ -124,6 +124,12 @@ div#demo-container{
 						onclick="requestSend('demo/insertDemo.do')">insertTest하기</button>
 				</div>
 			</div>
+			<div class="form-group row">
+				<div class="col-sm-12">
+					<button type="button" class="col-sm-12 btn btn-outline-primary"
+						onclick="requestSend('demo/demolist.do')">dev List</button>
+				</div>
+			</div>
 		</form>
 	</div>
 </section>

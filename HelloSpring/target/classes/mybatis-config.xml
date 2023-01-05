@@ -4,5 +4,6 @@
 	<!-- mapper에서 편히 쓰기 위한 설정 -->
 	<typeAliases>
 		<typeAlias type="com.bs.spring.demo.model.vo.Demo" alias="demo"/>
+		<typeAlias type="com.bs.spring.common.StringArrayHandler" alias="strArr"/>
 	</typeAliases>
 </configuration>

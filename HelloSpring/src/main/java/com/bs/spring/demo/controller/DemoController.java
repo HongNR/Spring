@@ -2,6 +2,7 @@ package com.bs.spring.demo.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -213,11 +214,25 @@ public class DemoController {
 		return "hello responseBody";
 	}
 	
+	//멤버 인서트
 	@RequestMapping("/demo/insertDemo.do")
 	public String insertDemo(Demo demo) {
 		int result=service.insertDemo(demo);
-		return "";
+		
+		//spring에서 redirect처리하기!!!!!!!!!!!!!!!!!!!!!!!!
+		return "redirect:/demo/demo.do";
 	}
+	
+	//리스트 출력
+	@RequestMapping("/demo/demolist.do")
+	public ModelAndView demolist(ModelAndView mv) {
+		List<Demo> list=service.selectDemoList();
+		mv.addObject("demos",list);
+		mv.setViewName("demo/demolist");
+		System.out.println(list);
+		return mv;
+	}
+	
 	
 	
 	
