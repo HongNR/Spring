@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Demo {
+	private int devNo;
 	private String devName;
 	private int devAge;
 	private String devEmail;
