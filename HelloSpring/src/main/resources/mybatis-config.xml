@@ -5,5 +5,6 @@
 	<typeAliases>
 		<typeAlias type="com.bs.spring.demo.model.vo.Demo" alias="demo"/>
 		<typeAlias type="com.bs.spring.common.StringArrayHandler" alias="strArr"/>
+		<typeAlias type="com.bs.spring.member.vo.Member" alias="member"/>
 	</typeAliases>
 </configuration>

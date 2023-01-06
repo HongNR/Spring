@@ -79,9 +79,9 @@ public class HomeController {
 //		System.out.println(a);
 //		System.out.println("dog : "+b);
 		
-		System.out.println(p);
-		
-		System.out.println(food);
+//		System.out.println(p);
+//		
+//		System.out.println(food);
 		//메인화면을 출력해주는 mapping 메소드
 		// /WEB-INF/views/return값.jsp 
 		// -> request.getRequestDispatcher("/WEB-INF/views/return값.jsp ").foward(req,res);
