@@ -180,6 +180,13 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- AOP적용을 위한 라이브러리 추가등록 -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		    <scope>runtime</scope>
+		</dependency>
 		
 		
 		

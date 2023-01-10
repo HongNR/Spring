@@ -98,12 +98,13 @@ public class HomeController {
 		//logger태그에 설정되어있는 level에 따라 메소드 실행여부가 결정됨.
 		//debug < info < warn < error
 		
-		logger.debug("난 debug야");
-		logger.info("난 info야");
-		logger.warn("난 warn이야");
-		logger.error("난 error야");
+//		logger.debug("난 debug야");
+//		logger.info("난 info야");
+//		logger.warn("난 warn이야");
+//		logger.error("난 error야");
+		
 		//logger로 다른 타입의 값 출력하기
-		logger.debug("food {} ", food);
+//		logger.debug("food {} ", food);
 		
 		
 		
