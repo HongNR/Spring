@@ -1,9 +1,16 @@
 package com.bs.spring.member.vo;
 
 import java.sql.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Member {
 	private String userId;
 	private String password;
