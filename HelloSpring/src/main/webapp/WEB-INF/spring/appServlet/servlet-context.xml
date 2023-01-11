@@ -55,4 +55,56 @@
 		<beans:property name="myAnimal" ref="alonge"/><!-- 참조형은 ref를 사용!! -->
 	</beans:bean>
 	
+	<!--  	<beans:bean id="service" class="com.bs.spring.demo.model.service.DemoServiceImpl">
+		<beans:constructor-arg index="0" ref="DemoDaoImpl">
+		<beans:constructor-arg index="1" ref="sqlSessionTemplate">
+	</beans:bean>  -->
+	
+	
+	<!-- 인터셉터등록하기 -->
+	<interceptors>
+		<interceptor>
+			<!-- 주소패턴으로 설정하는 값, filter, servlet url-pattern선언한것과 동일하게 작성 -->
+			<mapping path="/demo/*"/>
+			<!-- 특정매핑주소에 대해 예외처리를 할 수 있다. -->
+			<exclude-mapping path="/demo/demo.do"/>
+			<beans:bean class="com.bs.spring.common.interceptor.LoggerInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/demo/demolist.do"/>
+			<beans:ref bean="logincheck"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/board/boardWrite.do"/>
+			<beans:ref bean="logincheck"/>
+		</interceptor>
+	</interceptors>
+	
+	<beans:bean id="logincheck" 
+		class="com.bs.spring.common.interceptor.LoginCheckInterceptor"/>
+	
+	
+	<!-- 파일업로드처리 할 resolver를 등록하기 -->
+	<beans:bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일크기설정 -->
+		<beans:property name="maxUploadSize" value="104857600"/>
+	</beans:bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </beans:beans>

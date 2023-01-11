@@ -43,11 +43,14 @@
 							<a class="nav-link" href="${path }">HOME</a>
 						</li>
 						<li class="navbar-item">
-							<a class="nav-link" href="">게시판</a>
+							<a class="nav-link" href="${path }/board/board.do">게시판</a>
 						</li>
 
 						<li class="navbar-item">
 							<a class="nav-link" href="${path }/demo/demo.do">Demo</a>
+						</li>
+						<li class="navbar-item">
+							<a class="nav-link" href="${path }/memo/memo.do">Memo</a>
 						</li>
 					</ul>
 					<c:if test="${loginMember==null }">

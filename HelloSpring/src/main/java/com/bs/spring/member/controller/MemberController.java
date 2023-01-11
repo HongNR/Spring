@@ -1,7 +1,5 @@
 package com.bs.spring.member.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,10 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bs.spring.member.service.MemberService;
 import com.bs.spring.member.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @SessionAttributes({"loginMember"})//==model에 저장된 attribute 중 loginMember는 session이야
 @RequestMapping("/member")//여기 컨트롤러 전체에 /member/ 라는 주소가 붙게하기
+@Slf4j	//log 사용
 public class MemberController {
+	
+	//private final Logger logger=LoggerFactory.getLogger(MemberController.class);
 	
 	private MemberService service;
 	private BCryptPasswordEncoder passwordEncoder; //암호화
@@ -73,6 +76,8 @@ public class MemberController {
 	
 	@RequestMapping("/enrollMemberEnd.do")
 	public ModelAndView enrollMemberEnd(Member m,ModelAndView mv) {
+		log.debug("파라미터로 전달된 member : {} ",m);
+		
 		//password 암호화 처리하기★
 		String encodePassword=passwordEncoder.encode(m.getPassword());
 		m.setPassword(encodePassword);

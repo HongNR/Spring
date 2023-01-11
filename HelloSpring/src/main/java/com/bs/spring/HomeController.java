@@ -51,7 +51,7 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws IllegalAccessException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -60,6 +60,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		
+		if(1==1) throw new IllegalAccessException("내맘대로 에러!!");
 		
 		return "home";
 	}
@@ -87,8 +89,24 @@ public class HomeController {
 		// -> request.getRequestDispatcher("/WEB-INF/views/return값.jsp ").foward(req,res);
 		
 		
+		//Logger가 제공하는 메소드 이용해서 log 출력하기
+		//메소드 : debug, info, warn, error
+		//메소드는 출력되는 상황에 따라 결정해서 사용
+		// debug : 개발 시에 사용하는 로그
+		// info : 프로그램 실행중 사용자에게 전달해야하는 메세지 로그
+		// warn : 비정상적으로 로직이 돌아갔을 때 경고 로그
+		// error : 에러났을 때 ! 로그
 		
+		//logger태그에 설정되어있는 level에 따라 메소드 실행여부가 결정됨.
+		//debug < info < warn < error
 		
+//		logger.debug("난 debug야");
+//		logger.info("난 info야");
+//		logger.warn("난 warn이야");
+//		logger.error("난 error야");
+		
+		//logger로 다른 타입의 값 출력하기
+//		logger.debug("food {} ", food);
 		
 		
 		

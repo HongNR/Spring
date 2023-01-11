@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
 	<!-- mapper에서 편히 쓰기 위한 설정 -->
 	<typeAliases>
 		<typeAlias type="com.bs.spring.demo.model.vo.Demo" alias="demo"/>
 		<typeAlias type="com.bs.spring.common.StringArrayHandler" alias="strArr"/>
 		<typeAlias type="com.bs.spring.member.vo.Member" alias="member"/>
+		<typeAlias type="com.bs.spring.memo.model.vo.Memo" alias="memo"/>
+		<typeAlias type="com.bs.spring.board.model.vo.Board" alias="board"/>
+		<typeAlias type="com.bs.spring.board.model.vo.Attachment" alias="attachment"/>
 	</typeAliases>
 </configuration>
