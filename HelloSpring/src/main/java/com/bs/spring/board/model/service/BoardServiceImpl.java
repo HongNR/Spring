@@ -20,17 +20,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public int insertBoard(Board b) {
+		return dao.insertBoard(session, b);
+	}
+	
+	@Override
 	public int selectBoardCount() {
 		return dao.selectBoardCount(session);
 	}
 	
 	@Override
-	public List<Board> selectBoardList(Map<String,Integer> param){
-		return dao.selectBoardList(session,param);
+	public List<Board> selectBoardList(Map<String,Integer> page){
+		return dao.selectBoardList(session,page);
 	}
 	
 	@Override
-	public Board selectBoardView(int boardNo) {
-		return dao.selectBoardView(session,boardNo);
+	public Board selectBoard(int boardNo) {
+		return dao.selectBoard(session,boardNo);
 	}
 }

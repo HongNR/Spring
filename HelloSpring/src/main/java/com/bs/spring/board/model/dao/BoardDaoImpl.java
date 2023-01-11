@@ -13,19 +13,25 @@ import com.bs.spring.board.model.vo.Board;
 public class BoardDaoImpl implements BoardDao {
 	
 	@Override
+	public int insertBoard(SqlSessionTemplate session,Board b) {
+		return session.insert("board.insertBoard",b);
+	}
+	
+	
+	@Override
+	public List<Board> selectBoardList(SqlSessionTemplate session,Map<String,Integer> page){
+		return session.selectList("board.selectBoardList",null
+				,new RowBounds((page.get("cPage")-1)*page.get("numPerpage")
+						,page.get("numPerpage")));
+	}
+	
+	@Override
 	public int selectBoardCount(SqlSessionTemplate session) {
 		return session.selectOne("board.selectBoardCount");
 	}
 	
 	@Override
-	public List<Board> selectBoardList(SqlSessionTemplate session,Map<String,Integer> param){
-		return session.selectList("board.selectBoardList",null
-				,new RowBounds((param.get("cPage")-1)*param.get("numPerpage")
-						,param.get("numPerpage")));
-	}
-	
-	@Override
-	public Board selectBoardView(SqlSessionTemplate session,int boardNo) {
-		return session.selectOne("board.selectBoardView",boardNo);
+	public Board selectBoard(SqlSessionTemplate session,int boardNo) {
+		return session.selectOne("board.selectBoard",boardNo);
 	}
 }

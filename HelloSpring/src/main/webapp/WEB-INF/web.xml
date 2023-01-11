@@ -52,6 +52,10 @@
 	</filter-mapping>
 	
 	
+	<error-page>
+		<exception-type>com.bs.spring.common.AdminAccessException</exception-type>
+		<location>/WEB-INF/views/error/adminError.jsp</location>
+	</error-page>
 	
 	
 

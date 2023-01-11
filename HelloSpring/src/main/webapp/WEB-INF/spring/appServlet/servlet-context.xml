@@ -74,6 +74,10 @@
 			<mapping path="/demo/demolist.do"/>
 			<beans:ref bean="logincheck"/>
 		</interceptor>
+		<interceptor>
+			<mapping path="/board/boardWrite.do"/>
+			<beans:ref bean="logincheck"/>
+		</interceptor>
 	</interceptors>
 	
 	<beans:bean id="logincheck" 

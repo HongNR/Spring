@@ -6,8 +6,9 @@ import java.util.Map;
 import com.bs.spring.board.model.vo.Board;
 
 public interface BoardService {
+	int insertBoard(Board b);
+	List<Board> selectBoardList(Map<String,Integer> page);
 	int selectBoardCount();
-	public List<Board> selectBoardList(Map<String,Integer> param);
+	Board selectBoard(int boardNo);
 	
-	Board selectBoardView(int boardNo);
 }

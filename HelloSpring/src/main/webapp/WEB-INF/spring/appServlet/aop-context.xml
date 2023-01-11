@@ -14,4 +14,7 @@
 <!-- 		</aop:aspect> -->
 <!-- 	</aop:config> -->
 <!-- 	<bean id="loggerAspect" class="com.bs.spring.common.aop.LoggerAspect"/> -->
+
+	<!-- 어노테이션방식의 등록된 aspect를 불러옴-->
+	<aop:aspectj-autoproxy/>
 </beans>

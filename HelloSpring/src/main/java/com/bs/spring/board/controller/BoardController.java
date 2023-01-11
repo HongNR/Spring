@@ -28,7 +28,7 @@ public class BoardController {
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
 			@RequestParam(value="numPerpage", defaultValue="10")int numPerpage) {
 		
-		mv.addObject("boardList",service.selectBoardList(
+		mv.addObject("boards",service.selectBoardList(
 				Map.of("cPage",cPage,"numPerpage",numPerpage))
 				);
 		//페이징처리
@@ -42,16 +42,16 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardView.do")
-	public String boardView(int boardNo,Model model) {
-		Board result=service.selectBoardView(boardNo);
-		model.addAttribute("boardView",result);
+	public ModelAndView selectBoard(ModelAndView mv,int boardNo) {
+		mv.addObject("board",service.selectBoard(boardNo));
+		mv.setViewName("board/boardView");
 		
-		return "board/boardView";
+		return mv;
 	}
 	
-	@RequestMapping("/insertBoard.do")
-	public String insertBoard() {
+	@RequestMapping("/boardWrite.do")
+	public String boardWrite() {
 		
-		return "board/insertBoard";
+		return "board/boardWrite";
 	}
 }
