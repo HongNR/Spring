@@ -91,6 +91,18 @@
 		<beans:property name="maxUploadSize" value="104857600"/>
 	</beans:bean>
 	
+	<!-- json컨버터등록하기 -->
+	<beans:bean id="jacksonconverter"
+	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jacksonconverter"/>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	
 	
 	
 	

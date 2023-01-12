@@ -13,4 +13,8 @@
   		INSERT INTO MEMBER VALUES(#{userId},#{password},#{userName},#{gender},
   			#{age}, #{email}, #{phone}, #{address}, #{hobby, typeHandler=strArr}, DEFAULT)
   	</insert>
+  	
+  	<select id="selectMemberList" resultMap="memberMap">
+  		SELECT * FROM MEMBER
+  	</select>
 </mapper>

@@ -157,7 +157,7 @@ public class BoardController {
 			
 			response.setContentType("application/octet-stream;charset=utf-8");
 			response.setHeader("Content-Disposition",
-					"attachment:filename=\""+encodeFilename+"\"");
+					"attachment;filename=\""+encodeFilename+"\"");
 			
 			int read=-1;
 			while((read=bis.read())!=-1) {
