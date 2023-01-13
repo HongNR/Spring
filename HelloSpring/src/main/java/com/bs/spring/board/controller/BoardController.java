@@ -1,16 +1,22 @@
 package com.bs.spring.board.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,7 +44,7 @@ public class BoardController {
 	@RequestMapping("/board.do")
 	public ModelAndView selectBoardList(ModelAndView mv,
 			@RequestParam(value="cPage", defaultValue="1")int cPage,
-			@RequestParam(value="numPerpage", defaultValue="10")int numPerpage) {
+			@RequestParam(value="numPerpage", defaultValue="5")int numPerpage) {
 		
 		mv.addObject("boards",service.selectBoardList(
 				Map.of("cPage",cPage,"numPerpage",numPerpage))
@@ -104,7 +110,7 @@ public class BoardController {
 //					upFile.transferTo(new File(path+renameFile));
 					f.transferTo(new File(path+renameFile));
 					files.add(Attachment.builder()
-							.originalFilename(f.getOriginalFilename())
+							.originalFilename(originalFileName)
 							.renamedFilename(renameFile).build());
 					
 				}catch(IOException e) {
@@ -126,6 +132,42 @@ public class BoardController {
 		
 		mv.setViewName("common/msg");
 		return mv;
+	}
+	
+	@RequestMapping("/filedown.do")
+	public void fileDownload(String ori,String re
+			,HttpServletResponse response//응답을 위함
+			,HttpSession session
+			,@RequestHeader(value="User-agent") String header) {//인코딩처리를 위한것
+		String path=session.getServletContext().getRealPath("/resources/upload/board/");
+		File downloadFile=new File(path+re);
+		try(FileInputStream fis=new FileInputStream(downloadFile);
+				BufferedInputStream bis=new BufferedInputStream(fis);){//속도향상
+			ServletOutputStream sos=response.getOutputStream();//서버꺼
+			
+			//파일명 인코딩하기
+			boolean isMS=header.contains("Trident")||header.contains("MSIE");
+			String encodeFilename="";
+			if(isMS) {
+				encodeFilename=URLEncoder.encode(ori,"UTF-8");
+				encodeFilename=encodeFilename.replaceAll("\\+", "%20");
+			}else {
+				encodeFilename=new String(ori.getBytes("UTF-8"),"ISO-8859-1");
+			}
+			
+			response.setContentType("application/octet-stream;charset=utf-8");
+			response.setHeader("Content-Disposition",
+					"attachment;filename=\""+encodeFilename+"\"");
+			
+			int read=-1;
+			while((read=bis.read())!=-1) {
+				sos.write(read);
+			}
+			
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

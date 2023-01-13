@@ -21,11 +21,17 @@
     <c:if test="${not empty board.files }">
     	<c:forEach var="file" items="${board.files }">
 	        <button type="button" class="btn btn-outline-success btn-block"
-	              onclick="">${file.originalFilename }</button>
+	 onclick="fn_filedounload('${file.originalFilename}','${file.renamedFilename}');">
+	 ${file.originalFilename }</button>
         </c:forEach>
  	</c:if>
  	
     <textarea class="form-control" name="boardContent" placeholder="내용" 
     	required >${board.boardContent }</textarea>
 </div>
+<script>
+	const fn_filedounload=(oriname,rename)=>{
+		location.assign("${path}/board/filedown.do?ori="+oriname+"&re="+rename);
+	};
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>

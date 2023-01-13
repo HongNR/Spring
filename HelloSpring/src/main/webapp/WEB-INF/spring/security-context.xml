@@ -3,11 +3,59 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.1.xsd">
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd">
 	<!-- 단방향 암호화처리를 하는 클래스를 bean으로 등록 
-		BCryptPasswordEncoder클래스를 이용	
+		BCryptPasswordEncoder클래스를 이용
 	-->
 	<bean id="bcryptPassword" 
 	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
+	<!-- 클라이언트 요청에 대한 인증처리하는 설정 -->
+	<security:http auto-config="true">
+		<!--
+			 로그인하는 로직에 대한 설정
+			 username-parameter : 로그인 처리값 중 id값을 받아오는 이름(name속성명)
+			 password-parameter : 로그인 처리값 중 password값을 받아오는 이름(name속성명)
+			 default-target-url : 로그인 성공 시 기본으로 연결되는 페이지
+			 login-page : 기본 로그인페이지가 아닌 생성한 페이지로 이동할 때 사용.연결할 주소를 작성
+			 authentication-success-forward-url : 인증성공 시 연결되는 주소
+			 authentication-failure-forward-url : 인증실패 시 연결되는 주소
+			 login-processing-url : 로그인 로직 처리시 실행할 메소드 지정
+		 -->
+	
+		<security:form-login
+			login-page="/member/loginpage.do" 
+			username-parameter="userId" 
+			password-parameter="password" 
+			default-target-url="/"
+			authentication-failure-forward-url="/error.do"
+			authentication-success-forward-url="/successLogin.do"/>
+			
+			
+		<security:csrf disabled="true"/>
+		<!-- 인증을 받아야하는 주소를 등록하기 -->
+		<security:intercept-url pattern="/" access="permitAll()"/>
+		<security:intercept-url pattern="/resources/**" access="permitAll()"/>
+		<security:intercept-url pattern="/member/loginpage.do" access="permitAll()"/>
+		<security:intercept-url pattern="/member/enrollmember.do" access="permitAll()"/>
+		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+	
+	</security:http>
+	<!-- 
+		인증받을 방법에 대한 설정 
+		1. inmemory xml에 내부에 인증받을 수 있는 아이디 패스워드를 저장해놓은것
+		2.
+	-->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="admin" authorities="ROLE_USER" 
+				password="$2a$10$POix/RWagSYxZ0XJDH4aHecJQrH/V0ynrx1fCsPWqThgJhUjkYcS2"/>
+			</security:user-service>
+			<security:password-encoder ref="bcryptPassword"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	
 
 </beans>

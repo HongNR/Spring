@@ -1,5 +1,6 @@
 package com.bs.spring.config;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.bs.spring.model.vo.Animal;
 import com.bs.spring.model.vo.Person;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //beanconfiguration클래스로 구현하기
 @Configuration
@@ -38,5 +40,21 @@ public class BeanConfiguration {
 		p.setAge(31);
 		p.setMyAnimal(a);
 		return p;
+	}
+	@Bean
+	@Qualifier("data")
+	public BasicDataSource getData() {
+		BasicDataSource source=new BasicDataSource();
+		source.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+		source.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		source.setUsername("spring");
+		source.setPassword("spring");
+		return source;
+	}
+	
+	
+	@Bean
+	public ObjectMapper mapper() {
+		return new ObjectMapper();
 	}
 }
