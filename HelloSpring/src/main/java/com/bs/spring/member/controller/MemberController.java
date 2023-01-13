@@ -146,4 +146,29 @@ public class MemberController {
 		log.debug("{}",m);
 		return true;
 	}
+	
+	@RequestMapping("/loginpage.do")
+	public String loginpage() {
+		return "member/loginpage";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

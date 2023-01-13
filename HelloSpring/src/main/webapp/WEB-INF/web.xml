@@ -8,7 +8,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring/root-context.xml
-			/WEB-INF/spring/security-context.xml		
+			/WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -24,8 +24,8 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/appServlet/servlet-context.xml
-				/WEB-INF/spring/appServlet/aop-context.xml
+			/WEB-INF/spring/appServlet/servlet-context.xml
+			/WEB-INF/spring/appServlet/aop-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -35,8 +35,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<!-- 인코딩필터 적용하기 -> springframework에서 제공을 해줌 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -45,18 +45,32 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
-	</filter> 
+	</filter>
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	
+	<!-- 시큐리티적용필터 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+
+
 	<error-page>
 		<exception-type>com.bs.spring.common.AdminAccessException</exception-type>
 		<location>/WEB-INF/views/error/adminError.jsp</location>
 	</error-page>
-	
-	
+
+
+
+
 
 </web-app>
