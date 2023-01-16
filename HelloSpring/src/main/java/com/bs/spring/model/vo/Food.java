@@ -15,9 +15,9 @@ public class Food {
 	private String type;
 	private Person p;
 	
-	@Autowired
-	@Qualifier(value="yeonji")//Person이 여러명일 때 지정해서 사용하기
-	public void setPerson(Person p) {
-		this.p=p;
-	}
+//	@Autowired
+//	@Qualifier(value="yeonji")//Person이 여러명일 때 지정해서 사용하기
+//	public void setPerson(Person p) {
+//		this.p=p;
+//	}
 }

@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- 단방향 암호화처리를 하는 클래스를 bean으로 등록 
 		BCryptPasswordEncoder클래스를 이용
 	-->
@@ -12,17 +14,17 @@
 	
 	<!-- 클라이언트 요청에 대한 인증처리하는 설정 -->
 	<security:http auto-config="true">
-		<!--
-			 로그인하는 로직에 대한 설정
-			 username-parameter : 로그인 처리값 중 id값을 받아오는 이름(name속성명)
-			 password-parameter : 로그인 처리값 중 password값을 받아오는 이름(name속성명)
-			 default-target-url : 로그인 성공 시 기본으로 연결되는 페이지
-			 login-page : 기본 로그인페이지가 아닌 생성한 페이지로 이동할 때 사용.연결할 주소를 작성
-			 authentication-success-forward-url : 인증성공 시 연결되는 주소
-			 authentication-failure-forward-url : 인증실패 시 연결되는 주소
-			 login-processing-url : 로그인 로직 처리시 실행할 메소드 지정
-		 -->
-	
+		<!-- 
+			로그인처리하는 로직에 대한 설정 
+			username-parameter : 로그인 처리값중 id값을 받아오는 이름(name속성명)
+			password-parameter : 로그인 처리값중 password값을 받아오는 이름(name속성명)
+			default-target-url : 로그인 성공시 기본으로 연결되는 페이지
+			login-page : 기본 로그인페이지가 아닌 생성한 페이지로 이동할때 사용 연결할 주소를 작성
+			authentication-failure-forward-url : 인증실패시 연결되는 주소
+			authentication-success-forward-url : 인증성공시 연결되는 주소 
+			login-processing-url : 로그인 로직처리시 실행할 매소드 지정
+			
+		-->
 		<security:form-login
 			login-page="/member/loginpage.do" 
 			username-parameter="userId" 
@@ -33,13 +35,22 @@
 			
 			
 		<security:csrf disabled="true"/>
+		
 		<!-- 인증을 받아야하는 주소를 등록하기 -->
 		<security:intercept-url pattern="/" access="permitAll()"/>
 		<security:intercept-url pattern="/resources/**" access="permitAll()"/>
 		<security:intercept-url pattern="/member/loginpage.do" access="permitAll()"/>
 		<security:intercept-url pattern="/member/enrollmember.do" access="permitAll()"/>
+		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
 	
+	
+		<!-- 로그아웃처리하기 -->
+		<security:logout logout-url="/logout" logout-success-url="/"/>
+	
+		<!-- 권한에 맞지않는 주소에 접근했을때  -->
+		<security:access-denied-handler error-page="/WEB-INF/views/error/adminError.jsp"/>
+		
 	</security:http>
 	<!-- 
 		인증받을 방법에 대한 설정 
@@ -47,14 +58,34 @@
 		2.
 	-->
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<!-- <security:authentication-provider>
 			<security:user-service>
-				<security:user name="admin" authorities="ROLE_USER" 
+				<security:user name="admin" authorities="ROLE_ADMIN" 
+				password="$2a$10$POix/RWagSYxZ0XJDH4aHecJQrH/V0ynrx1fCsPWqThgJhUjkYcS2"/>
+				<security:user name="user" authorities="ROLE_USER" 
 				password="$2a$10$POix/RWagSYxZ0XJDH4aHecJQrH/V0ynrx1fCsPWqThgJhUjkYcS2"/>
 			</security:user-service>
 			<security:password-encoder ref="bcryptPassword"/>
+		</security:authentication-provider> -->
+		
+		<!-- 
+			DB와 연동하여 인증처리하는 provider제공하기 
+			1. 인증한 내용을 저장할 클래스를 생성 -> User(클래스), UserDetails인터페이스를 구현
+			2. 인증을 처리하는 service를 구현을 해줌 -> UserDetailService인터페이스 구현
+			
+			3. security:authentication-provider를 이용해서 service를 설정을 해줌
+			ex. context:component-scan등록해서 springbean을 가져오게 설정하기 	
+		-->
+		
+		<security:authentication-provider user-service-ref="loginService">
+			<security:password-encoder ref="bcryptPassword"/>
 		</security:authentication-provider>
+		
 	</security:authentication-manager>
+	
+	<bean id="loginService" class="com.bs.spring.security.SecurityService"/>
+	
+	<context:component-scan base-package="com.bs.spring"/>
 	
 	
 

@@ -75,6 +75,19 @@
 			});//ajax
 		}
 	</script>
+	<h1>jpa테스트하기</h1>
+	<h2><a href="${path }/jpa/insert">jpa회원 저장하기</a></h2>
+		<form action="${path }/jpa/insert">
+			<input type="text" name="userId">
+			<input type="submit" value="가입">
+		</form>
+	
+	<h2><a href="${path }/jpa/members">jpa전체회원 조회하기</a></h2>
+	<h2><a href="${path }/jpa/member?id=1">jpa회원 조회하기</a></h2>
+	<h2><a href="${path }/jpa/update?no=1&age=20&height=190.5&intro=새해 복 많이 받으세요">
+		jpa회원 수정하기</a></h2>
+	<h2><a href="${path }/jpa/delete?no=1">jpa회원 삭제하기</a></h2>
+	
 </section>
 
 <!-- 푸터파일 불러오기 -->

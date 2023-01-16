@@ -222,8 +222,22 @@
 		    <version>${org.springframework-version}</version>
 		</dependency>
 		
-		
-		
+		<!-- jpa의존성 등록하기 -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>5.6.7.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate.javax.persistence</groupId>
+		    <artifactId>hibernate-jpa-2.1-api</artifactId>
+		    <version>1.0.2.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>5.6.7.Final</version>
+		</dependency>
 		
 		
 	

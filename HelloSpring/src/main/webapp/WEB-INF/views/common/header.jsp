@@ -26,6 +26,10 @@
 		<header>
 			<div id="header-container">
 				<h2>${param.title }</h2>
+				<p>시큐리티 세션값 : ${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.username }
+					${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.age }										
+					${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.email }										
+				</p>
 			</div>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="#">
@@ -65,13 +69,13 @@
 					<c:if test="${loginMember!=null }">
 						<span>
 							<a href="${path}/member/memberView.do?userId=${loginMember.userId}">
-								<c:out value="${loginMember.userName }"/>님, </a>
+								<c:out value="${loginMember.userId }"/>님, </a>
 							환영합니다.
 						</span>
 						<button class="btn btn-outline-dark my-2 my-sm-0" 
 							onclick="chattingPageOpen();">채팅하기</button>
 						<button class="btn btn-outline-success my-2 my-sm-0" 
-							onclick="location.replace('${path}/member/logout.do');">로그아웃</button>
+							onclick="location.replace('${path}/logout');">로그아웃</button>
 					</c:if>
 				</div>
 			</nav>	
@@ -87,7 +91,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<form action="${path }/member/loginMember.do" method="post">
+					<form action="${path }/login" method="post">
 						<div class="modal-body">
 							<input type="text" name="userId" class="form-control"
 								placeholder="아이디 입력" required><br>

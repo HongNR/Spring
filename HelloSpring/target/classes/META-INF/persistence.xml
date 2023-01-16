@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+	<!-- 연결할 DB에 대한 정보를 persistence-unit태그 내부에 작성 -->
+	<persistence-unit name="bstest">
+		<properties>
+			<!-- DB연결정보저장하기 mybatis에서의 datasource부분 -->
+			<property name="javax.persistence.jdbc.driver"
+				value="oracle.jdbc.driver.OracleDriver"/>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:oracle:thin:@localhost:1521:xe"/>
+			<property name="javax.persistence.jdbc.user"
+				value="spring"/>
+			<property name="javax.persistence.jdbc.password"
+				value="spring"/>
+				
+			<!-- jpa가 적용할 DB에 대한 설정 -> 방언! -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.Oracle10gDialect"/>
+			
+			<!-- sql문 관련 내용 설정하기 -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			
+			<!-- 
+				Entity(DB테이블이랑 매핑된 클래스)로 등록된 클래스를 자동으로 DB에 생성해주는 설정 
+				개발중, 테스트 할 때 사용, 운영애플리케이션에서는 사용하지 않았으면 합니다...
+			-->
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
+			
+			
+		</properties>
+	</persistence-unit>
+
+</persistence>

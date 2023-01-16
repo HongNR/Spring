@@ -40,22 +40,22 @@
 	</beans:bean> -->
 	
 	<!-- 매개변수있는 생성자로 초기화하기 : model 객체에 매개변수 있는 클래스에 맞게 개수를 맞춰줘야함-->
-	<beans:bean id="alonge" class="com.bs.spring.model.vo.Animal">
-		<beans:constructor-arg index="0" value="아롱이2"/>
-		<beans:constructor-arg index="1" value="15"/>
+<!-- 	<beans:bean id="alonge" class="com.bs.spring.model.vo.Animal"> -->
+<!-- 		<beans:constructor-arg index="0" value="아롱이2"/> -->
+<!-- 		<beans:constructor-arg index="1" value="15"/> -->
 		<!-- <beans:constructor-arg index="2" value="남"/>
 		<beans:constructor-arg index="3" value="8.8"/> -->
-	</beans:bean>
+<!-- 	</beans:bean> -->
 	
-	<beans:bean id="dog" class="com.bs.spring.model.vo.Animal" 
-	init-method="initTest" destroy-method="destroyTest"/>
+<!-- 	<beans:bean id="dog" class="com.bs.spring.model.vo.Animal"  -->
+<!-- 	init-method="initTest" destroy-method="destroyTest"/> -->
 	<!-- 특정 시점에 실행시키는 메소드 init-method , destroy-method ..-->
 	
-	<beans:bean id="yeonji" class="com.bs.spring.model.vo.Person">
-		<beans:property name="name" value="연지"/>
-		<beans:property name="age" value="31"/>
-		<beans:property name="myAnimal" ref="alonge"/><!-- 참조형은 ref를 사용!! -->
-	</beans:bean>
+<!-- 	<beans:bean id="yeonji" class="com.bs.spring.model.vo.Person"> -->
+<!-- 		<beans:property name="name" value="연지"/> -->
+<!-- 		<beans:property name="age" value="31"/> -->
+<!-- 		<beans:property name="myAnimal" ref="alonge"/>참조형은 ref를 사용!! -->
+<!-- 	</beans:bean> -->
 	
 	<!--  	<beans:bean id="service" class="com.bs.spring.demo.model.service.DemoServiceImpl">
 		<beans:constructor-arg index="0" ref="DemoDaoImpl">

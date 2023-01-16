@@ -14,22 +14,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.bs.spring.common.AdminAccessException;
+import com.bs.spring.member.vo.Member;
 import com.bs.spring.model.vo.Animal;
 import com.bs.spring.model.vo.Food;
 import com.bs.spring.model.vo.Person;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes({"loginMember"})
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -37,20 +39,20 @@ public class HomeController {
 	//등록되어있는 springbean은 필드로 선언해서 사용 : Autowired
 	// 서버가 생성될 때 만들어지게 되어있음
 	
-	@Autowired
-	@Qualifier(value="alonge")//객체가 여러개일 때 하나만 지정해서 사용하기
-	private Animal a;
-
-	@Autowired
-	@Qualifier(value="dog")
-	private Animal b;
-	
-	@Autowired
-	@Qualifier(value="getDongmin")
-	private Person p;
-	
-	@Autowired(required=false)// 없으면 냅둬 but 잘 안씀
-	private Food food;
+//	@Autowired
+//	@Qualifier(value="alonge")//객체가 여러개일 때 하나만 지정해서 사용하기
+//	private Animal a;
+//
+//	@Autowired
+//	@Qualifier(value="dog")
+//	private Animal b;
+//	
+//	@Autowired
+//	@Qualifier(value="getDongmin")
+//	private Person p;
+//	
+//	@Autowired(required=false)// 없으면 냅둬 but 잘 안씀
+//	private Food food;
 	
 	
 	
@@ -129,6 +131,7 @@ public class HomeController {
 		Object o=SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		logger.debug("{}",o);
 		
+		m.addAttribute("loginMember",(Member)o);
 		return "redirect:/";
 	}
 	
