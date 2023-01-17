@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.spring.jpa.model.dao.JpaDao;
+import com.bs.spring.jpa.model.entity.Club;
 import com.bs.spring.jpa.model.entity.JpaMember;
+import com.bs.spring.jpa.model.entity.Major;
+import com.bs.spring.jpa.model.entity.Student;
 
 @Service
 public class JpaServiceImpl implements JpaService{
@@ -65,6 +68,43 @@ public class JpaServiceImpl implements JpaService{
 	public List<JpaMember> selectMemberAll() {
 		return dao.selectMemberAll(em);
 	}
+
+	@Override
+	public List<JpaMember> selectMemberSearch(Double height) {
+		return dao.selectMemberSearch(em,height);
+	}
+
+	@Override
+	public void insertMember() {
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		dao.insertMember(em);
+		et.commit();
+	}
+
+	@Override
+	public Major selectMajor(Long no) {
+		return dao.selectMajor(em,no);
+	}
+
+	@Override
+	public void insertStudentClub() {
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		dao.insertStudentClub(em);
+		et.commit();
+	}
+
+	@Override
+	public Student selectStudent(Long no) {
+		return dao.selectStudent(em, no);
+	}
+
+	@Override
+	public Club selectClub(Long no) {
+		return dao.selectClub(em, no);
+	}
+	
 	
 	
 
